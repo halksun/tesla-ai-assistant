@@ -1,5 +1,9 @@
 # Tesla × Grok Bot（中国区）只读查询 Playbook
 
+> **说明（请先看）**：本仓库以 **特斯拉（Tesla）中国区 + Grok Bot** 为完整可跑通的例子。  
+> **方法本身可迁移**：小米汽车、蔚来、小鹏、理想等只要提供官方开放平台 / 车主 API（或等价只读接口），都可以按同一思路做——车主自己的开发者应用、最小权限、密钥不出库、默认只读、控车单独强确认、例行用缓存少唤醒、给 AI Agent 写清检查清单。  
+> 各品牌的注册地址、OAuth、权限名和计费不同，请以各品牌官方文档为准；本仓库不提供、也不鼓励非官方破解或越权控车。
+
 > **给 AI Agent 读的开源流程说明**：读完本仓库后，你应能在**车主本人授权**下，复现一套特斯拉中国区 Fleet API → Grok Bot 只读监控的全流程（开发者应用、公钥托管、Partner 注册、OAuth、MCP、例行提醒）。
 >
 > Compatible with Tesla. **Not affiliated with, endorsed by, or sponsored by Tesla, Inc.**
