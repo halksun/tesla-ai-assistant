@@ -1,0 +1,44 @@
+diff --git a/src/tesla_mcp/config.py b/src/tesla_mcp/config.py
+index 6e5b16b..dbdc880 100644
+--- a/src/tesla_mcp/config.py
++++ b/src/tesla_mcp/config.py
+@@ -147,8 +147,12 @@ def _allowed_endpoint(kind: str, region: str) -> tuple[str, str]:
+     """
+     key = region.strip().lower()
+     if kind == "token":
++        if key == "cn":
++            return "auth.tesla.cn", _TOKEN_PATH
+         return _TOKEN_HOST, _TOKEN_PATH
+     if kind == "auth":
++        if key == "cn":
++            return "auth.tesla.cn", _AUTH_PATH
+         return _AUTH_HOST, _AUTH_PATH
+     if kind == "fleet":
+         host = _FLEET_HOSTS.get(key)
+@@ -369,14 +373,24 @@ class Settings:
+                 kind="fleet",
+                 region=region_name,
+             )
++        _default_token = (
++            "https://auth.tesla.cn/oauth2/v3/token"
++            if region_name.strip().lower() == "cn"
++            else TOKEN_URL
++        )
++        _default_auth = (
++            "https://auth.tesla.cn/oauth2/v3/authorize"
++            if region_name.strip().lower() == "cn"
++            else AUTHORIZE_URL
++        )
+         token_url = require_tesla_https_url(
+-            os.environ.get("TESLA_TOKEN_URL", TOKEN_URL),
++            os.environ.get("TESLA_TOKEN_URL", _default_token),
+             name="TESLA_TOKEN_URL",
+             kind="token",
+             region=region_name,
+         )
+         auth_url = require_tesla_https_url(
+-            os.environ.get("TESLA_AUTH_URL", AUTHORIZE_URL),
++            os.environ.get("TESLA_AUTH_URL", _default_auth),
+             name="TESLA_AUTH_URL",
+             kind="auth",
+             region=region_name,

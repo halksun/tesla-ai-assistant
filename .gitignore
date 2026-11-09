@@ -1,0 +1,22 @@
+# Secrets and local Tesla state — never commit
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+!docs/examples/*.pem.placeholder
+private-key.pem
+public-key.pem
+.tesla-mcp/
+.tesla_tokens/
+config.env
+tokens.json
+tokens.json.enc
+tokens.lock
+history.db
+history.db-*
+oauth-state*
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
